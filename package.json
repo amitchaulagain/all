@@ -26,6 +26,7 @@
     "react-router": "5.2.0",
     "react-router-dom": "^6.0.0-beta.0",
     "react-scripts": "^5.0.1",
+    "react-select": "^5.7.2",
     "styled-components": "^5.3.3",
     "web-vitals": "^1.1.2",
     "yup": "^0.32.11"
@@ -58,6 +59,7 @@
     "@babel/preset-env": "^7.16.11",
     "@types/jsdom": "^11.12.0",
     "axios-mock-adapter": "^1.20.0",
+    "browserify-css": "^0.15.0",
     "cross-env": "^7.0.3"
   }
 }

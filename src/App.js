@@ -3,6 +3,8 @@ import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./components/root/fragments/header/Header";
 import Home from "./components/root/home/Home";
+import Main from "./components/root/home/Main";
+
 import SignUp from "./components/root/users/signUp/SignUp";
 import RegisterBusiness from "./components/root/users/signUp/RegisterBusiness";
 import Login from "./components/root/users/login/Login";
@@ -30,6 +32,8 @@ function App() {
         <Routes>
           <Route element={<ProtectedRoutesGuest />}>
             <Route path="/" element={<Home />} />
+            <Route path="/cibt" element={<Main />} />
+
             <Route path="/signup" element={<SignUp />} />
             <Route path="/register-business" element={<RegisterBusiness />} />
             <Route path="/login" element={<Login />} />

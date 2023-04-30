@@ -668,9 +668,15 @@
 	.header-logo-menu.fixed .search-menu i#toggle-search {
 		color: #fff;
 	}
-	.single-slider {
+	.single-slider.one {
 		height: 350px;
 		text-align: center;
+		background-image: url(../img/slider/1.jpg)
+	}
+	.single-slider.two {
+		height: 350px;
+		text-align: center;
+		background-image: url(../img/slider/2.jpg)
 	}
 	.hero-slider-content {
 		margin: 0 10px;
