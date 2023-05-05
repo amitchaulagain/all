@@ -10,20 +10,7 @@ import style from "../../../../css/Footer.module.css";
 import { Link } from "react-router-dom";
 import AuthenticateUserDataService from "../../../../api/authentication/AuthenticateUserDataService";
 import LoadingDotsDark from "./animation/LoadingDotsDark";
-import Select from "react-select";
 
-const colourOptions = [
-  { value: 'ocean', label: 'Ocean', color: '#00B8D9', isFixed: true },
-  { value: 'blue', label: 'Blue', color: '#0052CC', isDisabled: true },
-  { value: 'purple', label: 'Purple', color: '#5243AA' },
-  { value: 'red', label: 'Red', color: '#FF5630', isFixed: true },
-  { value: 'orange', label: 'Orange', color: '#FF8B00' },
-  { value: 'yellow', label: 'Yellow', color: '#FFC400' },
-  { value: 'green', label: 'Green', color: '#36B37E' },
-  { value: 'forest', label: 'Forest', color: '#00875A' },
-  { value: 'slate', label: 'Slate', color: '#253858' },
-  { value: 'silver', label: 'Silver', color: '#666666' },
-]
 const Login = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -63,8 +50,8 @@ const Login = () => {
     if (Object.keys(errors).length === 0) {
       setLoading(true);
       const res = await AuthenticateUserDataService(
-        credentials.username,
-        credentials.password
+          credentials.username,
+          credentials.password
       );
       console.log(res.data);
 
@@ -93,12 +80,12 @@ const Login = () => {
           }));
         } else if (response.data === "USER") {
           AuthenticationService.registerSuccessfulLoginUser(
-            credentials.username
+              credentials.username
           );
           navigate("/user-home");
         } else if (response.data === "BUSINESS_USER") {
           AuthenticationService.registerSuccessfulLoginBusiness(
-            credentials.username
+              credentials.username
           );
           navigate("/business-home");
         }
@@ -107,89 +94,79 @@ const Login = () => {
   };
 
   return (
-    <>
-      <main>
-        <form className={styles.form_style}>
-          <div className={styles.loginh1}>
-            <h1>Login</h1>
-          </div>
-          <div className={styles.login}>
-            {loginState.hasLoginFailed && (
-              <div className={styles.midErrors}> Invalid credentials</div>
+      <>
+        <main>
+          <form className={styles.form_style}>
+            <div className={styles.loginh1}>
+              <h1>Login</h1>
+            </div>
+            <div className={styles.login}>
+              {loginState.hasLoginFailed && (
+                  <div className={styles.midErrors}> Invalid credentials</div>
+              )}
+              {loginState.showSuccessMessage && (
+                  <div className={styles.midErrors}>Login successful</div>
+              )}
+            </div>
+
+            <div className={styles.form_field}>
+              <input
+                  id="username"
+                  type="text"
+                  name="username"
+                  onChange={(e) =>
+                      setCredentials({ ...credentials, username: e.target.value })
+                  }
+                  required
+              />
+              <label htmlFor="username" className={styles.label_name}>
+                {Object.keys(errors).length === 0 && (
+                    <span className={styles.content_name}>Username</span>
+                )}
+                {errors.username && (
+                    <small className={styles.errors}>{errors.username}</small>
+                )}
+              </label>
+            </div>
+
+            <div className={styles.form_field}>
+              <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  onChange={(e) =>
+                      setCredentials({ ...credentials, password: e.target.value })
+                  }
+                  required
+              />
+              <label htmlFor="password" className={styles.label_name}>
+                {Object.keys(errors).length === 0 && (
+                    <span className={styles.content_name}>Password</span>
+                )}
+                {errors.password && (
+                    <small className={styles.errors}>Password required</small>
+                )}
+              </label>
+            </div>
+            <p>
+              <Link
+                  to="/change-password"
+                  className={styles.button_password_forgot}
+              >
+                Forgot your password?
+              </Link>
+            </p>
+            {loading && <LoadingDotsDark className={styles.dots} />}
+            {!loading && (
+                <button className={styles.button} onClick={loginClicked}>
+                  Login
+                </button>
             )}
-            {loginState.showSuccessMessage && (
-              <div className={styles.midErrors}>Login successful</div>
-            )}
-          </div>
-
-          <div className={styles.form_field}>
-            <Select
-                className="basic-single"
-                classNamePrefix="select"
-                defaultValue={colourOptions[0]}
-                isClearable={true}
-                isSearchable={true}
-                name="passport_from"
-                options={colourOptions}
-            />
-
-            <input
-              id="username"
-              type="text"
-              name="username"
-              onChange={(e) =>
-                setCredentials({ ...credentials, username: e.target.value })
-              }
-              required
-            />
-            <label htmlFor="username" className={styles.label_name}>
-              {Object.keys(errors).length === 0 && (
-                <span className={styles.content_name}>Username</span>
-              )}
-              {errors.username && (
-                <small className={styles.errors}>{errors.username}</small>
-              )}
-            </label>
-          </div>
-
-          <div className={styles.form_field}>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              onChange={(e) =>
-                setCredentials({ ...credentials, password: e.target.value })
-              }
-              required
-            />
-            <label htmlFor="password" className={styles.label_name}>
-              {Object.keys(errors).length === 0 && (
-                <span className={styles.content_name}>Password</span>
-              )}
-              {errors.password && (
-                <small className={styles.errors}>Password required</small>
-              )}
-            </label>
-          </div>
-          <p>
-            <Link
-              to="/change-password"
-              className={styles.button_password_forgot}
-            >
-              Forgot your password?
-            </Link>
-          </p>
-          {loading && <LoadingDotsDark className={styles.dots} />}  
-          {!loading && (
-            <button className={styles.button} onClick={loginClicked}>
-              Login
-            </button>
-          )}
-        </form>
-      </main>
-      <Footer class={style.footer_cover} />
-      <Background />
-    </>
+          </form>
+        </main>
+        <Footer class={style.footer_cover} />
+        <Background />
+      </>
   );
 };
 
