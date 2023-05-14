@@ -18,16 +18,29 @@ const ListEmployeeComponent = () => {
 
 
 
+
     const deleteEmployee = (id) => {
         EmployeeService.deleteEmployee(id).then( res => {
-           // this.setState({employees: this.state.employees.filter(employee => employee.id !== id)});
+            refresh();
         });
     }
     const viewEmployee=(id) =>{
-        this.props.history.push(`/view-employee/${id}`);
+        navigate(`/view-employee/`+id,
+            { state: {
+                    id: id
+                }
+            }
+
+        );
     }
     const editEmployee=(id) =>{
-        this.props.history.push(`/add-employee/${id}`);
+        navigate(`/update-employee/`+id,
+        { state: {
+            id: id
+        }
+        }
+
+    );
     }
 
    /* componentDidMount(){
@@ -40,9 +53,7 @@ const ListEmployeeComponent = () => {
         navigate('/add-employee/_add');
     }
 
-    useLayoutEffect(() => {
-        let username = AuthenticationService.getLoggedInUser();
-
+    const refresh=() =>{
         try {
             EmployeeService.getEmployees().then(res=>{
                 setEmployees(res.data)
@@ -53,7 +64,11 @@ const ListEmployeeComponent = () => {
                 error += err.response;
             }
 
-        }
+        }    }
+
+    useLayoutEffect(() => {
+
+        refresh();
     }, []);
 
     return (

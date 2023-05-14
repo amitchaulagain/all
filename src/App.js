@@ -75,10 +75,6 @@ function App() {
             <Route path = "/update-employee/:id" element={<UpdateEmployeeComponent/>}></Route>
 
 
-            {/* <Route path = "/add-employee/:id" elem = {CreateEmployeeComponent}></Route>
-            <Route path = "/view-employee/:id" component = {ViewEmployeeComponent}></Route>
-             <Route path = "/update-employee/:id" component = {UpdateEmployeeComponent}></Route>*/}
-
 
           </Route>
         </Routes>

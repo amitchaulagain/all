@@ -1,23 +1,38 @@
-import React, { Component } from 'react'
+import React, {Component, useLayoutEffect, useState} from 'react'
 import EmployeeService from './EmployeeService'
+import AuthenticationService from "../../../../api/authentication/AuthenticationService";
+import {useLocation, useNavigate} from "react-router-dom";
 
-class ViewEmployeeComponent extends Component {
-    constructor(props) {
-        super(props)
+const ViewEmployeeComponent = ()=> {
+    let emp={
+        id:0,
+        firstName:"",
+        lastName:"",
+        emailId:""
+    }
 
-        this.state = {
-            id: this.props.match.params.id,
-            employee: {}
+    const [employee, setEmployee] = useState(emp);
+
+    const location = useLocation();
+
+
+    useLayoutEffect(() => {
+        let id =location.state.id;
+
+        try {
+            EmployeeService.getEmployeeById(id).then(res=>{
+                setEmployee(res.data)
+            });
+        } catch (err) {
+            let error = "";
+            if (err.response) {
+                error += err.response;
+            }
+
         }
-    }
+    }, []);
 
-    componentDidMount(){
-        EmployeeService.getEmployeeById(this.state.id).then( res => {
-            this.setState({employee: res.data});
-        })
-    }
 
-    render() {
         return (
             <div>
                 <br></br>
@@ -26,22 +41,22 @@ class ViewEmployeeComponent extends Component {
                     <div className = "card-body">
                         <div className = "row">
                             <label> Employee First Name: </label>
-                            <div> { this.state.employee.firstName }</div>
+                            <div> { employee.firstName }</div>
                         </div>
                         <div className = "row">
                             <label> Employee Last Name: </label>
-                            <div> { this.state.employee.lastName }</div>
+                            <div> { employee.lastName }</div>
                         </div>
                         <div className = "row">
                             <label> Employee Email ID: </label>
-                            <div> { this.state.employee.emailId }</div>
+                            <div> { employee.emailId }</div>
                         </div>
                     </div>
 
                 </div>
             </div>
         )
-    }
-}
+
+};
 
 export default ViewEmployeeComponent

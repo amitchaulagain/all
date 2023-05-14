@@ -1,58 +1,75 @@
-import React, { Component } from 'react'
+import React, {Component, useLayoutEffect, useState} from 'react'
 import EmployeeService from './EmployeeService';
+import {useLocation, useNavigate} from "react-router-dom";
+import AuthenticationService from "../../../../api/authentication/AuthenticationService";
 
-class UpdateEmployeeComponent extends Component {
-    constructor(props) {
-        super(props)
+const UpdateEmployeeComponent =()=> {
+    const navigate = useNavigate();
+    const location = useLocation();
 
-        this.state = {
-            id: this.props.match.params.id,
-            firstName: '',
-            lastName: '',
-            emailId: ''
-        }
-        this.changeFirstNameHandler = this.changeFirstNameHandler.bind(this);
-        this.changeLastNameHandler = this.changeLastNameHandler.bind(this);
-        this.updateEmployee = this.updateEmployee.bind(this);
+
+
+    /*   this.changeFirstNameHandler = this.changeFirstNameHandler.bind(this);
+       this.changeLastNameHandler = this.changeLastNameHandler.bind(this);
+       this.saveOrUpdateEmployee = this.saveOrUpdateEmployee.bind(this);*/
+    const [id, setId] = useState([]);
+
+    let emp={
+        id:0,
+        firstName:"",
+        lastName:"",
+        emailId:""
     }
+    const [employee, setEmployee] = useState(emp);
 
-    componentDidMount(){
-        EmployeeService.getEmployeeById(this.state.id).then( (res) =>{
-            let employee = res.data;
-            this.setState({firstName: employee.firstName,
-                lastName: employee.lastName,
-                emailId : employee.emailId
-            });
+    /*let emp={
+        "id":"",
+        firstName:"",
+        lastName:"",
+        emailId:"",
+
+    }*/
+
+
+
+    useLayoutEffect(() => {
+         let id =location.state.id;
+        console.log("employee id :"+ id)
+
+        EmployeeService.getEmployeeById(id).then( (res) =>{
+
+            setEmployee(res.data);
+
         });
-    }
-
-    updateEmployee = (e) => {
+    }, []);
+    const updateEmployee = (e) => {
         e.preventDefault();
-        let employee = {firstName: this.state.firstName, lastName: this.state.lastName, emailId: this.state.emailId};
-        console.log('employee => ' + JSON.stringify(employee));
-        console.log('id => ' + JSON.stringify(this.state.id));
-        EmployeeService.updateEmployee(employee, this.state.id).then( res => {
-            this.props.history.push('/employees');
+         console.log('employee => ' + JSON.stringify(employee));
+        EmployeeService.updateEmployee(employee, location.state.id).then( res => {
+            navigate('/employees');
         });
     }
-    
-    changeFirstNameHandler= (event) => {
-        this.setState({firstName: event.target.value});
+
+    const changeFirstNameHandler= (event) => {
+        employee.firstName=event.target.value;
+        setEmployee(employee);
+
     }
 
-    changeLastNameHandler= (event) => {
-        this.setState({lastName: event.target.value});
+    const changeLastNameHandler= (event) => {
+        employee.lastName=event.target.value;
+        setEmployee(employee);
     }
 
-    changeEmailHandler= (event) => {
-        this.setState({emailId: event.target.value});
+    const changeEmailHandler= (event) => {
+        employee.lastName=event.target.value;
+        setEmployee(employee);
     }
 
-    cancel(){
-        this.props.history.push('/employees');
+    const cancel=()=>{
+        navigate('/employees');
     }
 
-    render() {
         return (
             <div>
                 <br></br>
@@ -65,21 +82,21 @@ class UpdateEmployeeComponent extends Component {
                                         <div className = "form-group">
                                             <label> First Name: </label>
                                             <input placeholder="First Name" name="firstName" className="form-control" 
-                                                value={this.state.firstName} onChange={this.changeFirstNameHandler}/>
+                                                defaultValue={employee.firstName} onChange={changeFirstNameHandler}/>
                                         </div>
                                         <div className = "form-group">
                                             <label> Last Name: </label>
-                                            <input placeholder="Last Name" name="lastName" className="form-control" 
-                                                value={this.state.lastName} onChange={this.changeLastNameHandler}/>
+                                            <input placeholder="Last Name" name="lastName" className="form-control"
+                                                   defaultValue={employee.lastName} onChange={changeLastNameHandler}/>
                                         </div>
                                         <div className = "form-group">
                                             <label> Email Id: </label>
-                                            <input placeholder="Email Address" name="emailId" className="form-control" 
-                                                value={this.state.emailId} onChange={this.changeEmailHandler}/>
+                                            <input placeholder="Email Address" name="emailId" className="form-control"
+                                                   defaultValue={employee.emailId} onChange={changeEmailHandler}/>
                                         </div>
 
-                                        <button className="btn btn-success" onClick={this.updateEmployee}>Save</button>
-                                        <button className="btn btn-danger" onClick={this.cancel.bind(this)} style={{marginLeft: "10px"}}>Cancel</button>
+                                        <button className="btn btn-success" onClick={updateEmployee}>Save</button>
+                                        <button className="btn btn-danger" onClick={cancel} style={{marginLeft: "10px"}}>Cancel</button>
                                     </form>
                                 </div>
                             </div>
@@ -88,7 +105,7 @@ class UpdateEmployeeComponent extends Component {
                    </div>
             </div>
         )
-    }
-}
+
+};
 
 export default UpdateEmployeeComponent

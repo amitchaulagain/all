@@ -47,7 +47,7 @@ const CreateEmployeeComponent = () => {
     }
 
     const cancel=()=>{
-        this.props.history.push('/employees');
+        navigate('/employees');
     }
 
     const getTitle=()=>{
@@ -83,7 +83,7 @@ const CreateEmployeeComponent = () => {
                                         </div>
 
                                         <button className="btn btn-success" onClick={saveOrUpdateEmployee}>Save</button>
-                                        <button className="btn btn-danger" onClick={saveOrUpdateEmployee} style={{marginLeft: "10px"}}>Cancel</button>
+                                        <button className="btn btn-danger" onClick={cancel} style={{marginLeft: "10px"}}>Cancel</button>
                                     </form>
                                 </div>
                             </div>
