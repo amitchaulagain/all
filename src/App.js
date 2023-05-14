@@ -23,6 +23,10 @@ import EditBusinessProfile from "./components/root/users/business/AccountBusines
 import UpdateOffer from "./components/root/users/business/Offer/UpdateOffer";
 import PasswordChange from "./components/root/users/login/forgottenPassword/PasswordChange";
 import SetUpNewPassword from "./components/root/users/login/forgottenPassword/SetUpNewPassword";
+import ListEmployeeComponent from "./components/root/employee/components/ListEmployeeComponent";
+import CreateEmployeeComponent from "./components/root/employee/components/CreateEmployeeComponent";
+import ViewEmployeeComponent from "./components/root/employee/components/ViewEmployeeComponent";
+import UpdateEmployeeComponent from "./components/root/employee/components/UpdateEmployeeComponent";
 
 function App() {
   return (
@@ -60,6 +64,22 @@ function App() {
             <Route path="/create-offer" element={<CreateOffer />} />
             <Route path="/account-business" element={<AccountBusiness />} />
             <Route path="/offer/:id" element={<Hobbie />} />
+            {/*Emmployee Routes */}
+
+
+            <Route path = "/employees" element={<ListEmployeeComponent/>}></Route>
+            <Route path = "/add-employee/:id" element={<CreateEmployeeComponent/>}></Route>
+
+            <Route path = "/view-employee/:id" element={<ViewEmployeeComponent/>}></Route>
+
+            <Route path = "/update-employee/:id" element={<UpdateEmployeeComponent/>}></Route>
+
+
+            {/* <Route path = "/add-employee/:id" elem = {CreateEmployeeComponent}></Route>
+            <Route path = "/view-employee/:id" component = {ViewEmployeeComponent}></Route>
+             <Route path = "/update-employee/:id" component = {UpdateEmployeeComponent}></Route>*/}
+
+
           </Route>
         </Routes>
       </div>
