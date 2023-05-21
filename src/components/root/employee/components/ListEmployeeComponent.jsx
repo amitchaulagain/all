@@ -14,7 +14,7 @@ const ListEmployeeComponent = () => {
 
 
     const [employees, setEmployees] = useState([]);
-    const navigate = useNavigate();
+        const navigate = useNavigate();
 
 
 
