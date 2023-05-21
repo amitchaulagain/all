@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Header from "./components/root/fragments/header/Header";
 import Home from "./components/root/home/Home";
 import Main from "./components/root/home/Main";
@@ -27,60 +27,64 @@ import ListEmployeeComponent from "./components/root/employee/components/ListEmp
 import CreateEmployeeComponent from "./components/root/employee/components/CreateEmployeeComponent";
 import ViewEmployeeComponent from "./components/root/employee/components/ViewEmployeeComponent";
 import UpdateEmployeeComponent from "./components/root/employee/components/UpdateEmployeeComponent";
+import MyImagesComponent from "./components/root/fileupload/component/MyImagesComponent";
+import UploadImageComponent from "./components/root/fileupload/component/UploadImageComponent";
 
 function App() {
-  return (
-    <Router>
-      <div className="App">
-        <Header />
-        <Routes>
-          <Route element={<ProtectedRoutesGuest />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/cibt" element={<Main />} />
+    return (
+        <Router>
+            <div className="App">
+                <Header/>
+                <Routes>
+                    <Route element={<ProtectedRoutesGuest/>}>
+                        <Route path="/" element={<Home/>}/>
+                        <Route path="/cibt" element={<Main/>}/>
 
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/register-business" element={<RegisterBusiness />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/change-password" element={<PasswordChange />} />
-            <Route path="/password/:id" element={<SetUpNewPassword />} />
-          </Route>
-          <Route element={<ProtectedRoutesUser />}>
-            <Route path="/edit-profile" element={<EditUserProfile />} />
-            <Route path="/user-home" element={<UserHome />} />
-            <Route path="/account-user" element={<AccountUser />} />
-            <Route path="/test" element={<TestForm />} />
-            <Route path="/my-hobbies" element={<MyHobbies />} />
-            <Route path="/hobbie/:id" element={<Hobbie />} />
-          </Route>
+                        <Route path="/signup" element={<SignUp/>}/>
+                        <Route path="/register-business" element={<RegisterBusiness/>}/>
+                        <Route path="/login" element={<Login/>}/>
+                        <Route path="/change-password" element={<PasswordChange/>}/>
+                        <Route path="/password/:id" element={<SetUpNewPassword/>}/>
+                    </Route>
+                    <Route element={<ProtectedRoutesUser/>}>
+                        <Route path="/edit-profile" element={<EditUserProfile/>}/>
+                        <Route path="/user-home" element={<UserHome/>}/>
+                        <Route path="/account-user" element={<AccountUser/>}/>
+                        <Route path="/test" element={<TestForm/>}/>
+                        <Route path="/my-hobbies" element={<MyHobbies/>}/>
+                        <Route path="/hobbie/:id" element={<Hobbie/>}/>
+                    </Route>
 
-          <Route element={<ProtectedRoutesBusiness />}>
-            <Route
-              path="/edit-business-profile"
-              element={<EditBusinessProfile />}
-            />
-            <Route path="/edit-offer" element={<UpdateOffer />} />
-            <Route path="/business-home" element={<UserHome />} />
-            <Route path="/account-business" element={<AccountBusiness />} />
-            <Route path="/create-offer" element={<CreateOffer />} />
-            <Route path="/account-business" element={<AccountBusiness />} />
-            <Route path="/offer/:id" element={<Hobbie />} />
-            {/*Emmployee Routes */}
-
-
-            <Route path = "/employees" element={<ListEmployeeComponent/>}></Route>
-            <Route path = "/add-employee/:id" element={<CreateEmployeeComponent/>}></Route>
-
-            <Route path = "/view-employee/:id" element={<ViewEmployeeComponent/>}></Route>
-
-            <Route path = "/update-employee/:id" element={<UpdateEmployeeComponent/>}></Route>
+                    <Route element={<ProtectedRoutesBusiness/>}>
+                        <Route
+                            path="/edit-business-profile"
+                            element={<EditBusinessProfile/>}
+                        />
+                        <Route path="/edit-offer" element={<UpdateOffer/>}/>
+                        <Route path="/business-home" element={<UserHome/>}/>
+                        <Route path="/account-business" element={<AccountBusiness/>}/>
+                        <Route path="/create-offer" element={<CreateOffer/>}/>
+                        <Route path="/account-business" element={<AccountBusiness/>}/>
+                        <Route path="/offer/:id" element={<Hobbie/>}/>
+                        {/*Emmployee Routes */}
 
 
+                        <Route path="/employees" element={<ListEmployeeComponent/>}></Route>
+                        <Route path="/add-employee/:id" element={<CreateEmployeeComponent/>}></Route>
 
-          </Route>
-        </Routes>
-      </div>
-    </Router>
-  );
+                        <Route path="/view-employee/:id" element={<ViewEmployeeComponent/>}></Route>
+
+                        <Route path="/update-employee/:id" element={<UpdateEmployeeComponent/>}></Route>
+
+                        <Route path='/my-images' element={<MyImagesComponent/>}></Route>
+                        <Route path='/upload' element={<UploadImageComponent/>}></Route>
+
+
+                    </Route>
+                </Routes>
+            </div>
+        </Router>
+    );
 }
 
 export default App;
