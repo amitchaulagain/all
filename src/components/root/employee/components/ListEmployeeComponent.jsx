@@ -14,48 +14,46 @@ const ListEmployeeComponent = () => {
 
 
     const [employees, setEmployees] = useState([]);
-        const navigate = useNavigate();
-
-
+    const navigate = useNavigate();
 
 
     const deleteEmployee = (id) => {
-        EmployeeService.deleteEmployee(id).then( res => {
+        EmployeeService.deleteEmployee(id).then(res => {
             refresh();
         });
     }
-    const viewEmployee=(id) =>{
-        navigate(`/view-employee/`+id,
-            { state: {
+    const viewEmployee = (id) => {
+        navigate(`/view-employee/` + id,
+            {
+                state: {
                     id: id
                 }
             }
-
         );
     }
-    const editEmployee=(id) =>{
-        navigate(`/update-employee/`+id,
-        { state: {
-            id: id
-        }
-        }
-
-    );
+    const editEmployee = (id) => {
+        navigate(`/update-employee/` + id,
+            {
+                state: {
+                    id: id
+                }
+            }
+        );
     }
 
-   /* componentDidMount(){
-        EmployeeService.getEmployees().then((res) => {
-            this.setState({ employees: res.data});
-        });
-    }*/
+    /* componentDidMount(){
+         EmployeeService.getEmployees().then((res) => {
+             this.setState({ employees: res.data});
+         });
+     }*/
 
-   const addEmployee=() =>{
+    const addEmployee = () => {
         navigate('/add-employee/_add');
     }
 
-    const refresh=() =>{
+    const refresh = () => {
         try {
-            EmployeeService.getEmployees().then(res=>{
+            EmployeeService.getEmployees().then(res => {
                 setEmployees(res.data)
             });
         } catch (err) {
@@ -64,9 +62,10 @@ const ListEmployeeComponent = () => {
                 error += err.response;
             }
 
-        }    }
+        }
+    }
 
-    useLayoutEffect(() => {
+    useLayoutEffect = (() => {
 
         refresh();
     }, []);
@@ -75,12 +74,12 @@ const ListEmployeeComponent = () => {
 
         <div>
             <h2 className="text-center">Employees List</h2>
-            <div className = "row">
+            <div className="row">
                 <button className="btn btn-primary" onClick={addEmployee}> Add Employee</button>
             </div>
             <br></br>
-            <div className = "row">
-                <table className = "table table-striped table-bordered">
+            <div className="row">
+                <table className="table table-striped table-bordered">
 
                     <thead>
                     <tr>
@@ -94,14 +93,20 @@ const ListEmployeeComponent = () => {
                     {
                         employees.map(
                             employee =>
-                                <tr key = {employee.id}>
-                                    <td> { employee.firstName} </td>
+                                <tr key={employee.id}>
+                                    <td> {employee.firstName} </td>
                                     <td> {employee.lastName}</td>
                                     <td> {employee.emailId}</td>
                                     <td>
-                                        <button onClick={ () => editEmployee(employee.id)} className="btn btn-info">Update </button>
-                                        <button style={{marginLeft: "10px"}} onClick={ () => deleteEmployee(employee.id)} className="btn btn-danger">Delete </button>
-                                        <button style={{marginLeft: "10px"}} onClick={ () => viewEmployee(employee.id)} className="btn btn-info">View </button>
+                                        <button onClick={() => editEmployee(employee.id)}
+                                                className="btn btn-info">Update
+                                        </button>
+                                        <button style={{marginLeft: "10px"}} onClick={() => deleteEmployee(employee.id)}
+                                                className="btn btn-danger">Delete
+                                        </button>
+                                        <button style={{marginLeft: "10px"}} onClick={() => viewEmployee(employee.id)}
+                                                className="btn btn-info">View
+                                        </button>
                                     </td>
                                 </tr>
                         )
