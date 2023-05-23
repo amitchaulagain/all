@@ -66,7 +66,7 @@ function App() {
                         <Route path="/create-offer" element={<CreateOffer/>}/>
                         <Route path="/account-business" element={<AccountBusiness/>}/>
                         <Route path="/offer/:id" element={<Hobbie/>}/>
-                        {/*Emmployee Routes */}
+                       {/* Emmployee Routes */}
 
 
                         <Route path="/employees" element={<ListEmployeeComponent/>}></Route>

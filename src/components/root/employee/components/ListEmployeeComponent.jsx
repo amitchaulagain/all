@@ -65,7 +65,7 @@ const ListEmployeeComponent = () => {
         }
     }
 
-    useLayoutEffect = (() => {
+    useLayoutEffect  (() => {
 
         refresh();
     }, []);

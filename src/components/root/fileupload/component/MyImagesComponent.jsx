@@ -16,7 +16,7 @@ const MyImagesComponent = () => {
     const [pokemons, setPokemons] = useState([]);
 
 
-    /* useLayoutEffect = (() => {
+     useLayoutEffect  (() => {
 
 
         //console.log(res.data)
@@ -25,7 +25,7 @@ const MyImagesComponent = () => {
         getMultipleImages();
 
 
-    }, []);*/
+    }, []);
 
 
     /*  get multiple images*/
